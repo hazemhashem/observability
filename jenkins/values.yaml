@@ -1215,7 +1215,7 @@ persistence:
   # -- Annotations for the PVC
   annotations: {}
   # -- Labels for the PVC
-  labels: {}
+  labels: 
   # -- The PVC access mode
   accessMode: "ReadWriteMany"
   # -- The size of the PVC
@@ -1223,9 +1223,9 @@ persistence:
 
   # ref: https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/
   # -- Existing data source to clone PVC from
-  dataSource: {}
-  #   name: PVC-NAME
-  #   kind: PersistentVolumeClaim
+  dataSource: 
+     name: "efs-claim"
+     kind: PersistentVolumeClaim
 
   # -- SubPath for jenkins-home mount
   subPath:
