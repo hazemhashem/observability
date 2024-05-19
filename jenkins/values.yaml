@@ -1203,7 +1203,7 @@ persistence:
   # Requires persistence.enabled: true
   # If defined, PVC must be created manually before volume will be bound
   # -- Provide the name of a PVC
-  existingClaim:
+  existingClaim: "efs-claim"
 
   # jenkins data Persistent Volume Storage Class
   # If defined, storageClassName: <storageClass>
@@ -1224,8 +1224,8 @@ persistence:
   # ref: https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/
   # -- Existing data source to clone PVC from
   dataSource: 
-     name: "efs-claim"
-     kind: PersistentVolumeClaim
+    # name: "efs-claim"
+    # kind: PersistentVolumeClaim
 
   # -- SubPath for jenkins-home mount
   subPath:
