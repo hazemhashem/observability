@@ -2,23 +2,23 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: git-generator
-  namespace: argocd
+  namespace: default
 spec:
   generators:
   - git:
-      repoURL: https://github.com/hazemhashem/CWD-argocd.git
+      repoURL: https://github.com/hazemhashem/observability.git
       revision: main
       directories:
       - path: Helm/*
-        #- path: Helm/monitoring
-        #  exclude: true
+      - path: Helm/promtail
+        exclude: true
   template:
     metadata:
       name: '{{path.basename}}'
     spec:
       project: default
       source:
-        repoURL: https://github.com/hazemhashem/CWD-argocd.git
+        repoURL: https://github.com/hazemhashem/observability.git
         targetRevision: main
         path: '{{path}}'
       destination:
