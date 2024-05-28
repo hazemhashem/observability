@@ -10,8 +10,8 @@ spec:
       revision: main
       directories:
       - path: Helm/*
-      - path: Helm/promtail
-        exclude: true
+        #- path: Helm/promtail
+        # exclude: true
   template:
     metadata:
       name: '{{path.basename}}'
@@ -21,9 +21,12 @@ spec:
         repoURL: https://github.com/hazemhashem/observability.git
         targetRevision: main
         path: '{{path}}'
+        helm:
+          valueFiles:
+          - '{{ if eq .path "Helm/loki" }}Helm/loki/custom-values.yaml{{ end }}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{path.basename}}'
+        namespace: '{{ if eq .path "Helm/loki" }}loki{{ else if eq .path "Helm/promtail" }}loki{{ else }}{{path.basename}}{{ end }}'
       syncPolicy:
         automated: {}
         syncOptions:
