@@ -23,7 +23,7 @@ spec:
         path: '{{path}}'
         helm:
           valueFiles:
-          - '{{ if eq .path "Helm/loki" }}Helm/loki/custom-values.yaml{{ end }}'
+          - 'Helm/{{path.basename}}/custom-values.yaml'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{ if eq .path "Helm/loki" }}loki{{ else if eq .path "Helm/promtail" }}loki{{ else }}{{path.basename}}{{ end }}'
